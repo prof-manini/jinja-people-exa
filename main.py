@@ -1,7 +1,8 @@
 from recordclass import recordclass
-import jinja2
+import jinja2 as jinja
 
 # https://jinja.palletsprojects.com/en/2.11.x/
+# https://jinja.palletsprojects.com/en/2.11.x/templates/
 
 fields = "id cognome nome".split()
 
@@ -15,7 +16,12 @@ data = [s.split()
         if s.strip()]
 
 Person = recordclass("Person", fields)
+pp = [Person(*r) for r in data]
 
-people = [Person(*r) for r in data]
-for p in people:
-    print(p)
+with open("templates/people.html") as file:
+    template = jinja.Template(file.read())
+
+html = template.render(people=pp)
+
+with open("out/people.html", "w") as file:
+    file.write(html)

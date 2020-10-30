@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Some random people</title>
+  </head>
+  <body>
+    <ol>
+      {# Some comment #}
+      {% for p in people %}
+	<li> {{ p.cognome.capitalize() }} {{ p.nome.upper() }} </li>
+      {% endfor %}
+    </ol>
+  </body>
+</html>
